@@ -1,0 +1,65 @@
+
+# Set the hostname of your Server
+nano /etc/hostname
+# Put the information of Server
+site.domain.com
+nano /etc/hosts
+# Put the information of Server
+127.0.0.1     localhost
+127.0.1.1     site.domain.com subdomain.domain.com
+
+# Setup local user and group
+adduser wordpress
+usermod -aG sudo wordpress
+groups wordpress
+
+# Install Apache
+apt install apache2
+systemctl status apache2
+# Install MariaDB
+sudo apt install mariadb 
+
+# Configure Mariadb for WP
+sudo mariadb 
+SHOW DATABASES;
+CREATE DATABASE wordpress_db DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+SHOW DATABASES;
+GRANT ALL PRIVILEGES ON wordpress_db.* TO wordpress_user@localhost INDENTIFIED BY 'secret_password'; 
+FLUSH PRIVILEGES;
+EXIT;
+sudo mysql_secure_installation 
+
+# Install Wordpress 
+wget url_wordpress and unzip files 
+
+# Change Owner of Directory 
+
+sudo chown -R www-data: wordpress_directory
+mv wordpress_directory /var/www
+sudo nano /etc/apache2/sites-avaliable/worpress.conf
+# Create configuratong 
+<VirtualHost *:80>
+
+# Enable Virtiual Host conf new
+sudo a2ensite wordpress.conf
+# Disable Old Conf
+sudo a2dissite 000-default.conf
+
+# Install PHP dependencies for Wordpress 
+sudo apt install (list of dependencies)
+
+sudo a2enmod rewrite 
+
+systemctl restart apache2
+
+
+
+
+
+
+
+
+
+
+
+
